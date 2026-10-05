@@ -132,8 +132,6 @@ print(selected_files[0])
 #
 # dataset.set_files_to_process(selected_files)
 #
-# we directly populate the internal selected-file list.
-#
 # ============================================================
 
 dataset._selected_tuple_files = selected_files.copy()
@@ -342,8 +340,6 @@ for sample in dataset:
 
                         else:
 
-                            # Fallback in case performance
-                            # dictionary is already aggregate
                             perf_agg = perf
 
 
@@ -413,12 +409,9 @@ for sample in dataset:
                     str(node)
                     for node in route_list
                 )
-
-
                 # ============================================
                 # PHYSICAL PATH INFORMATION
                 # ============================================
-
                 physical_path_list = []
 
                 if physical_path_matrix is not None:
@@ -448,11 +441,6 @@ for sample in dataset:
                     str(node)
                     for node in physical_path_list
                 )
-
-
-                # ============================================
-                # PATH BANDWIDTH
-                # ============================================
 
                 link_bandwidths = []
 
@@ -510,18 +498,7 @@ for sample in dataset:
                     mean_path_bandwidth = np.nan
 
 
-                # ============================================
-                # OPTIONAL PACKET-LOSS RATE
-                # ============================================
-                #
-                # We retain the original PktsDrop field.
-                #
-                # A normalized packet-loss ratio is also
-                # calculated when TotalPktsGen is available.
-                #
-                # ============================================
-
-                packets_drop = safe_float(
+                   packets_drop = safe_float(
                     perf_agg.get(
                         "PktsDrop",
                         np.nan
@@ -554,16 +531,10 @@ for sample in dataset:
                     packet_loss_ratio = np.nan
 
 
-                # ============================================
-                # CREATE ROW
-                # ============================================
-
+               
                 row = {
 
-                    # ----------------------------------------
-                    # IDENTIFIERS
-                    # ----------------------------------------
-
+                  
                     "sample_id":
                         sample_id,
 
